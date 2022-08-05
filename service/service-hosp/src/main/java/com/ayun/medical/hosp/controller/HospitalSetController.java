@@ -1,10 +1,12 @@
 package com.ayun.medical.hosp.controller;
 
 
+import com.ayun.medical.common.result.Result;
 import com.ayun.medical.hosp.service.HospitalSetService;
 import com.ayun.medical.model.hosp.HospitalSet;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,16 +24,20 @@ public class HospitalSetController {
     //查询医院设置所有信息
     @ApiOperation(value = "查询医院设置所有信息")
     @GetMapping("/findAll")
-    public List<HospitalSet> findallHospitalSet(){
+    public Result findallHospitalSet(){
         List<HospitalSet> list = hospitalSetService.list();
-        return list;
+        return Result.ok(list);
     }
 
     //删除医院设置
     @ApiOperation(value = "逻辑删除医院")
     @DeleteMapping("{id}")
-    public boolean removeHospSet(@PathVariable Long id){
+    public Result removeHospSet(@PathVariable Long id){
         boolean flag = hospitalSetService.removeById(id);
-        return flag;
+        if (flag) {
+            return Result.ok();
+        } else {
+            return Result.fail();
+        }
     }
 }
