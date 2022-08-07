@@ -1,7 +1,6 @@
-package com.ayun.medical.vo.cmn;
+package com.ayun.medical.cmn.vo;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-
 import lombok.Data;
 
 /**

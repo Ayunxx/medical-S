@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
         e.printStackTrace();
         return Result.fail();
     }
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(MedicalException.class)
     @ResponseBody
     public Result error(MedicalException e){
         e.printStackTrace();

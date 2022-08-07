@@ -1,6 +1,5 @@
-package com.ayun.medical.vo.hosp;
+package com.ayun.medical.hosp.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

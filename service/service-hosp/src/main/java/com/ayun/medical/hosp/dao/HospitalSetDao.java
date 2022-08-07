@@ -1,6 +1,6 @@
 package com.ayun.medical.hosp.dao;
 
-import com.ayun.medical.model.hosp.HospitalSet;
+import com.ayun.medical.hosp.entity.HospitalSet;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
