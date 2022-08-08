@@ -5,11 +5,16 @@ import com.ayun.medical.cmn.dao.DictDao;
 import com.ayun.medical.cmn.entity.Dict;
 import com.ayun.medical.cmn.service.DictService;
 import com.ayun.medical.cmn.vo.DictEeVo;
+import com.ayun.medical.listenner.DictListener;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -19,6 +24,10 @@ import java.util.List;
 @Service
 public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictService {
 
+
+
+    //根据id查询子数据列表
+    @Cacheable(value = "dict",keyGenerator = "keyGenerator")
     @Override
     public List<Dict> findChildDataById(Long id) {
         QueryWrapper<Dict> wrapper = new QueryWrapper<>();
@@ -34,6 +43,10 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
         return dictList;
     }
 
+
+    //导入数据字典
+
+    @CacheEvict(value = "dict",allEntries = true)
     @Override
     public void exportDictData(HttpServletResponse response) {
         //设置下载信息
@@ -63,8 +76,13 @@ public class DictServiceImpl extends ServiceImpl<DictDao, Dict> implements DictS
     }
 
     @Override
-    public void importDictData() {
-
+    public void importDictData(MultipartFile file) {
+        try {
+            EasyExcel.read(file.getInputStream(), DictService.class,new DictListener(baseMapper))
+                    .sheet().doRead();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //判断id下是否有子节点

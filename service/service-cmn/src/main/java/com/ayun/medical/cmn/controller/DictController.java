@@ -3,6 +3,7 @@ package com.ayun.medical.cmn.controller;
 
 import com.ayun.medical.cmn.entity.Dict;
 import com.ayun.medical.cmn.service.DictService;
+
 import com.ayun.medical.common.result.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +28,7 @@ public class DictController {
     //导入数据字典
     @PostMapping("importDict")
     public Result importDict(MultipartFile file){
-        dictService.importDictData();
+        dictService.importDictData(file);
         return Result.ok();
     }
 

@@ -18,6 +18,18 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
+#Redis
+  redis:
+    host: 192.168.10.50
+    port: 6390
+    database: 0
+    timeout: 1800000
+    lettuce:
+      pool:
+        max-active: 20
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
 #mapper.xml 位置
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
