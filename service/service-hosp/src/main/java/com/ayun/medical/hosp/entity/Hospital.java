@@ -1,9 +1,8 @@
-package com.ayun.medical.model.hosp;
+package com.ayun.medical.hosp.entity;
 
 import com.alibaba.fastjson.JSONObject;
-
 import com.ayun.medical.model.base.BaseMongoEntity;
-
+import com.ayun.medical.model.hosp.BookingRule;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
